@@ -3,7 +3,7 @@ apiVersion: 1
 
 # list of datasources that should be deleted from the database
 deleteDatasources:
-  - name: SPU
+  - name: Harvester
     orgId: 1
 
 # list of datasources to insert/update depending
@@ -20,11 +20,11 @@ datasources:
   # <string> url
   url: http://influxdb:8086
   # <string> database password, if used
-  password: "admin"
+  password: "12345678"
   # <string> database user, if used
   user: "admin"
   # <string> database name, if used
-  database: "spu"
+  database: "harvester"
   # <bool> enable/disable basic auth
   basicAuth: false
 #  withCredentials:

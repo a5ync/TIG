@@ -59,30 +59,33 @@ docker-compose down -v
 ```
 ## InfluxDb queries
 ``` bash
+docker exec -it tig-influxdb-1 bash
+influx
 show databases
 use database_name
 show measurements
+
 show tag values from test_measurement with key = host
 show tag values cardinality from test_measurement with key=host
 
 drop measurement name_of_measurement
 
-select * from test_measurement	
+select * from test_measurement
 select * from test_measurement order by time desc limit 10
 select * from test_measurement where time>now() -1h order by time desc limit 10
 
 // in order to change the output format of time column from default unix epoch to RFC3339
 precision rfc3339
 ```
+
 ## Testing and tools
 ### Packet Sender
 [Packet Sender](https://packetsender.com) is a convenient tool for testing UDP/TCP messages. Please see an example of a measurement packet in samples. Messages should be send to udp://localhost:8092 (telegraf instance).
 
 ### Netcat (Linux/Mac)
-
+To submit an UDP packet with measurement
 ``` bash
-echo "<measurement name>,my_tag_key=my_tag_value,influxdb_database=<target database> value=777"  \
-     | nc -vv -u -w1 192.168.108.70 8092
+echo -e  "measurement2,mytagkey=mytagvalue,influxdb_database=harvester value=123" | nc -u -w1 127.0.0.1 8092
 ```
 
 ### Powershell (Windows/Mac/Linux)
